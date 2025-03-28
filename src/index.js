@@ -3,11 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-// 오류
 import { RouterProvider } from "react-router/dom";
 import { createBrowserRouter } from "react-router";
 
-// 수정
 import NotFound from "./pages/NotFound";
 import Movies from "./pages/Movies";
 import MovieList from "./pages/MovieList";
