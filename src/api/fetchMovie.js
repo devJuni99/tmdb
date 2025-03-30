@@ -20,7 +20,7 @@ export class fetchApis {
       .get(`/movie/${movieId}/videos`, {
         params: {
           movie_id: movieId,
-          language: 'ko-KR',
+          language: 'en-US',
         },
       })
       .then((res) => res.data.results);

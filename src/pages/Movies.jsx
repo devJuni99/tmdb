@@ -1,7 +1,8 @@
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router';
 import MovieCard from '../components/MovieCard';
-import { FakeMovies } from '../api/fakeMovies';
+// import { FakeMovies } from '../api/fakeMovies';
 import { fetchApis } from '../api/fetchMovie';
 
 export default function Movies() {

@@ -1,48 +1,53 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useLocation } from 'react-router';
-import { fetchApis } from '../api/fetchMovie';
+import Buttons from '../components/Buttons';
 
 export default function MovieDetail() {
   const { state: movies } = useLocation();
-  const {
-    isError,
-    isLoading,
-    data: detail,
-  } = useQuery({
-    queryKey: ['details', movies],
-    queryFn: () => {
-      const youtube = new fetchApis();
-      return youtube.getMovieVideos(movies.id);
-    },
-  });
-
-  console.log(movies);
-  if (isError) return <p>Error...</p>;
-  if (isLoading) return <p>Loading...</p>;
+  const description = movies.overview
+    ? movies.overview
+    : '현재 이 영화에 대한 설명이 제공되지 않습니다.';
+  const backgroundURL = movies.backdrop_path
+    ? `https://image.tmdb.org/t/p/original${movies.backdrop_path}`
+    : null;
+  const postURL = movies.poster_path
+    ? `https://image.tmdb.org/t/p/original${movies.poster_path}`
+    : null;
 
   return (
     <section>
-      <h2 className="font-bold text-3xl">
-        내가 클릭한 티저 모음 몰아보기 Zip🔗
-      </h2>
-      <article className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 overflow-hidden">
-        {detail.map((items, idx) => (
-          <div
-            key={items.id}
-            className="aspect-video rounded overflow-hidden shadow-md"
-          >
-            <iframe
-              title={detail[idx].name}
-              src={`https://www.youtube.com/embed/${detail[idx].key}`}
-              frameBorder="0"
-              className="w-full h-full"
-            />
-          </div>
-        ))}
-      </article>
+      <main
+        className="relative min-h-screen w-full bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: backgroundURL ? `url(${backgroundURL})` : 'none',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/70" />
 
-      <article></article>
+        <div className="relative z-10 flex p-8">
+          <article className="flex flex-col md:flex-row gap-6 text-white">
+            <div className="w-full max-w-xs md:max-w-sm lg:max-w-md">
+              <img
+                src={postURL}
+                alt={movies.title}
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
+            </div>
+
+            <div className="flex flex-col gap-4 pt-12">
+              <h2 className="text-4xl font-bold">
+                {movies.original_title} ({movies.release_date.substring(0, 4)})
+              </h2>
+              <p className="flex gap-4">
+                <span>개봉일: {movies.release_date}</span>
+                <span>평점: {movies.vote_average}</span>
+              </p>
+              <Buttons />
+              <span className="text-lg">{description}</span>
+            </div>
+          </article>
+        </div>
+      </main>
     </section>
   );
 }

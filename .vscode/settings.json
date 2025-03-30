@@ -8,6 +8,6 @@
     "typescriptreact"
   ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true // 저장 시 ESLint 자동 수정
+    "source.fixAll.eslint": "explicit"
   }
 }

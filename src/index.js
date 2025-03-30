@@ -8,7 +8,7 @@ import { createBrowserRouter } from 'react-router';
 
 import NotFound from './pages/NotFound';
 import Movies from './pages/Movies';
-import MovieList from './pages/MovieList';
+// import MovieList from './pages/MovieList';
 import MovieDetail from './pages/MovieDetail';
 
 const router = createBrowserRouter([

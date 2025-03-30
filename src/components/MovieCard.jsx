@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function MovieCard({ items }) {
   const navigate = useNavigate();
   const { poster_path, original_title, release_date, vote_average } = items;
   const imgURL = `https://image.tmdb.org/t/p/w200${poster_path}`;
 
+  console.log(items);
   return (
     <section
       onClick={() => navigate(`/movie/watch/${items.id}`, { state: items })}
