@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router';
 import Buttons from '../components/Buttons';
+import Videos from '../components/Videos';
 
 export default function MovieDetail() {
   const { state: movies } = useLocation();
@@ -47,6 +48,8 @@ export default function MovieDetail() {
             </div>
           </article>
         </div>
+
+        <Videos />
       </main>
     </section>
   );

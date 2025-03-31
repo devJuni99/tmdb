@@ -1,8 +1,11 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchApis } from '../api/fetchMovie';
+import { useLocation } from 'react-router';
 
 export default function Videos() {
+  const { state: movies } = useLocation();
+
   const {
     isError,
     isLoading,
