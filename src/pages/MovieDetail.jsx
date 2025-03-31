@@ -23,7 +23,7 @@ export default function MovieDetail() {
           backgroundImage: backgroundURL ? `url(${backgroundURL})` : 'none',
         }}
       >
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-black/30" />
 
         <div className="relative z-10 flex p-8">
           <article className="flex flex-col md:flex-row gap-6 text-white">
@@ -44,7 +44,9 @@ export default function MovieDetail() {
                 <span>평점: {movies.vote_average}</span>
               </p>
               <Buttons />
-              <span className="text-lg">{description}</span>
+              <span className="text-lg break-words max-w-3xl">
+                {description}
+              </span>
             </div>
           </article>
         </div>

@@ -15,17 +15,6 @@ export class fetchApis {
     return keyword ? this.#searchMovies(keyword) : this.#popularList();
   }
 
-  async getMovieVideos(movieId) {
-    return this.httpClient
-      .get(`/movie/${movieId}/videos`, {
-        params: {
-          movie_id: movieId,
-          language: 'en-US',
-        },
-      })
-      .then((res) => res.data.results);
-  }
-
   async #searchMovies(keyword) {
     return this.httpClient
       .get('/search/movie', {
@@ -43,6 +32,27 @@ export class fetchApis {
         params: {
           language: 'ko-KR',
           page: 1,
+        },
+      })
+      .then((res) => res.data.results);
+  }
+
+  async getMovieVideos(movieId) {
+    return this.httpClient
+      .get(`/movie/${movieId}/videos`, {
+        params: {
+          movie_id: movieId,
+          language: 'en-US',
+        },
+      })
+      .then((res) => res.data.results);
+  }
+
+  async trendMovies() {
+    return this.httpClient
+      .get(`/trending/all/day`, {
+        params: {
+          language: 'ko-KR',
         },
       })
       .then((res) => res.data.results);

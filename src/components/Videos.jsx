@@ -3,6 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchApis } from '../api/fetchMovie';
 import { useLocation } from 'react-router';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 export default function Videos() {
   const { state: movies } = useLocation();
 
@@ -13,8 +19,8 @@ export default function Videos() {
   } = useQuery({
     queryKey: ['details', movies],
     queryFn: () => {
-      const youtube = new fetchApis();
-      return youtube.getMovieVideos(movies.id);
+      const detail = new fetchApis();
+      return detail.getMovieVideos(movies.id);
     },
   });
 
@@ -22,19 +28,34 @@ export default function Videos() {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <article className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {detail.map((items, idx) => (
-        <div
-          key={items.id}
-          className="aspect-video rounded overflow-hidden shadow-md"
-        >
-          <iframe
-            title={detail[idx].name}
-            src={`https://www.youtube.com/embed/${detail[idx].key}`}
-            className="w-full h-full"
-          />
-        </div>
-      ))}
-    </article>
+    <div className="p-4">
+      <h2 className="text-white font-bold text-4xl mb-6">
+        내가 클릭한 영화의 티저를 몰아보기🍿
+      </h2>
+
+      <Swiper
+        modules={[Navigation, Pagination]}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+      >
+        {detail.slice(0, 5).map((items) => (
+          <SwiperSlide key={items.id}>
+            <div className="aspect-video rounded overflow-hidden shadow-md">
+              <iframe
+                title={items.name}
+                src={`https://www.youtube.com/embed/${items.key}`}
+                className="w-full h-full"
+                allowFullScreen
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 }

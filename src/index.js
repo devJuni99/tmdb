@@ -8,8 +8,8 @@ import { createBrowserRouter } from 'react-router';
 
 import NotFound from './pages/NotFound';
 import Movies from './pages/Movies';
-// import MovieList from './pages/MovieList';
 import MovieDetail from './pages/MovieDetail';
+import Visual from './components/Visual';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Movies />,
+        element: <Visual />,
       },
       {
         path: 'movie/:keyword',
